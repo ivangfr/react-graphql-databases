@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+
+  author-book-ui:
+    image: docker.mycompany.com/author-book-ui:1.0.0
+    container_name: author-book-ui
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      AUTHOR_BOOK_API_HOST: author-book-api
+      AUTHOR_BOOK_API_PORT: 8080
+      BOOK_REVIEW_API_HOST: book-review-api
+      BOOK_REVIEW_API_PORT: 9080
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "80" ]
+      start_period: 20s
+
+  book-review-ui:
+    image: docker.mycompany.com/book-review-ui:1.0.0
+    container_name: book-review-ui
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    environment:
+      BOOK_REVIEW_API_HOST: book-review-api
+      BOOK_REVIEW_API_PORT: 9080
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "80" ]
+      start_period: 20s
