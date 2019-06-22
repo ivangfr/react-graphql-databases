@@ -8,7 +8,7 @@ function ReviewModal({ modal, book, handleChange, handleRate, submitReview, hand
       const stars = [...Array(review.rating).keys()].map(i => <Icon key={i} name='star' />)
       return (
         <Comment key={review.reviewer}>
-          <Comment.Avatar src={`https://robohash.org/${review.reviewer}.png?set=set4`} />
+          <Comment.Avatar src={`https://robohash.org/${review.reviewer}.png`} />
           <Comment.Content>
             <Comment.Author as='a'>{review.reviewer}</Comment.Author>
             <Comment.Metadata>

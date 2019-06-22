@@ -74,7 +74,13 @@ docker-compose -f docker-compose.yml -f /PATH/TO/SPRINGBOOT_GRAPHQL_DATABASES/do
 
 ## Demo
 
-TODO
+This gif shows a staff member adding a book using the wizard option. First, he looks for the author `josh long`. The search is looking for data at [**openlibrary.org**](https://openlibrary.org/). Then, he picks the book `Getting Started With Roo`. As the author `Josh Long` is new to the application, he is created. The information of the book is already fulfilled based on the response from **openlibrary.org**. Finally, the application shows the preview of the book card, as the customer will see it. The checkbox is enabled in order to create the book also in `book-review-ui`.
+
+![add-book-wizard](images/add-book-wizard.gif)
+
+This another gif shows a customer adding a review about the book `Getting Started With Roo`. Once the review is submitted, it is already available for customer checking books in `author-book-ui` application.
+
+![add-book-review](images/add-book-review.gif)
 
 ## Running ReactJS apps with Npm
 
@@ -103,7 +109,7 @@ docker-compose -f docker-compose.yml -f /PATH/TO/SPRINGBOOT_GRAPHQL_DATABASES/do
 
 ## TODO
 
-- Add a GIF Demo
+- add confirmation dialog before deleting a book or a author
 
 ## References
 
