@@ -53,6 +53,13 @@ docker build -f Dockerfile -t docker.mycompany.com/book-review-ui:1.0.0 .
 | `BOOK_REVIEW_API_HOST` | Specify host of the `book-review-api` service (default `localhost`) |
 | `BOOK_REVIEW_API_PORT` | Specify port of the `book-review-api` service (default `9080`)      |
 
+## Configure /etc/hosts
+
+Add the line below to `/etc/hosts`
+```
+127.0.0.1 author-book-api book-review-api
+```
+
 ## Start environment
 
 In a terminal and inside `react-graphql-database` root folder run
