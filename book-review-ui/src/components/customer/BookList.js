@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Card, CardContent, Typography, CardActions, Button, Badge, Paper } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, CardActions, Button, Badge, Paper } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function BookList({ isLoading, books, openReviewsModal }) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   if (isLoading) {
     return null

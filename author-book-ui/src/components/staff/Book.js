@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Grid, Segment, Header } from 'semantic-ui-react'
 import authorBookApi from '../misc/author-book-api'
-import BookTable from './BookTable';
-import BookForm from './BookForm';
+import BookTable from './BookTable'
+import BookForm from './BookForm'
 
 class Book extends Component {
   formInitialState = {

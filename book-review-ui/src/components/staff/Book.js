@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Grid } from '@material-ui/core'
-import BookForm from './BookForm';
-import BookTable from './BookTable';
+import BookForm from './BookForm'
+import BookTable from './BookTable'
 import bookReviewApi from '../misc/book-review-api'
 
 class Staff extends Component {

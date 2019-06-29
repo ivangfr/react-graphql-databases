@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Dropdown, Input, Form, Divider } from 'semantic-ui-react';
+import { Segment, Dropdown, Input, Form, Divider } from 'semantic-ui-react'
 
 function AuthorStep({ authorId, authorIdError, authorName, authorNameError, authorDropdown, handleChange, createAuthor, handleDropdownChange, handleDropdownSearchChange }) {
   return (

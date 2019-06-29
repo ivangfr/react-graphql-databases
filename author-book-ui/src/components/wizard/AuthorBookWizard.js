@@ -14,8 +14,8 @@ class AuthorBookWizard extends Component {
 
     // Search Step
     search: '',
-    books: '',
-    selectedBook: '',
+    books: [],
+    selectedBook: null,
     isLoading: false,
 
     // Auhtor Step
@@ -53,7 +53,7 @@ class AuthorBookWizard extends Component {
 
     let { selectedBook, authorId, authorName, authorIdError, authorNameError, isbn, title, year, isbnError, titleError, yearError } = this.state
     if (step === 2) {
-      selectedBook = ''
+      selectedBook = null
       authorId = ''
       authorName = ''
       authorIdError = false
@@ -140,10 +140,7 @@ class AuthorBookWizard extends Component {
   searchBooks = () => {
     this.setState({ isLoading: true })
 
-    let { search } = this.state
-    search = search.match(/\S+/g).join('+')
-
-    openLibraryApi.get(`/search.json?q=${search}`)
+    openLibraryApi.get(`/search.json?q=${encodeURI(this.state.search)}`)
       .then(response => {
         const books = response.data.docs
           .filter(doc => doc.isbn && doc.title_suggest && doc.author_name && doc.publish_year)
@@ -252,7 +249,7 @@ class AuthorBookWizard extends Component {
         headers: { 'Content-type': 'application/graphql' }
       })
       .then(() => {
-        this.props.history.push("/book");
+        this.props.history.push("/book")
       })
       .catch(error => {
         console.log(error)
@@ -386,12 +383,12 @@ class AuthorBookWizard extends Component {
 
             <Button.Group fluid>
               <Button
-                disabled={this.state.step === 1}
+                disabled={step === 1}
                 onClick={this.previousStep}>Back</Button>
               <Button.Or />
               <Button
                 positive
-                disabled={this.state.step === 4}
+                disabled={step === 4}
                 onClick={this.nextStep}>Next</Button>
             </Button.Group>
           </Grid.Column>

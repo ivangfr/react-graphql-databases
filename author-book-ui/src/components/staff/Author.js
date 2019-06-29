@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Grid, Segment, Header } from 'semantic-ui-react'
 import authorBookApi from '../misc/author-book-api'
 import AuthorTable from './AuthorTable'
-import AuthorForm from './AuthorForm';
+import AuthorForm from './AuthorForm'
 
 class Author extends Component {
   formInitialState = {

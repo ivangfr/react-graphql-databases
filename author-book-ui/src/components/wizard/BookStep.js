@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Form } from 'semantic-ui-react';
+import { Segment, Form } from 'semantic-ui-react'
 
 function BookStep({ isbn, title, year, isbnError, titleError, yearError, handleChange }) {
   return (

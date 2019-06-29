@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextField, Button, Paper } from '@material-ui/core';
+import { TextField, Button, Paper } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   form: {

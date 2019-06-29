@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Header, Segment } from 'semantic-ui-react'
-import BookCard from './BookCard';
+import BookCard from './BookCard'
 
 function BookList({ isLoading, books, openReviewsModal }) {
   if (isLoading) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container } from '@material-ui/core'
 import bookReviewApi from '../misc/book-review-api'
-import BookList from './BookList';
+import BookList from './BookList'
 import ReviewModal from './ReviewModal'
 
 class Customer extends Component {

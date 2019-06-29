@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Navbar from './components/misc/Navbar';
+import Navbar from './components/misc/Navbar'
 import Customer from './components/customer/Customer'
 import Book from './components/staff/Book'
 
@@ -12,7 +12,7 @@ function App() {
       <Route path='/customer' exact component={Customer} />
       <Route path='/book' exact component={Book} />
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

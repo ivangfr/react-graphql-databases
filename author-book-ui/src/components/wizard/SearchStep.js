@@ -33,7 +33,7 @@ function SearchStep({ search, isLoading, books, selectedBook, handleChange, sear
             value={search}
             onChange={handleChange}
           />
-          <Form.Button content='Search' />
+          <Form.Button primary content='Search' />
         </Form.Group>
       </Form>
 
