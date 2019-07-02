@@ -2,12 +2,6 @@ import React from 'react'
 import { Card, Icon, Label, Image, Button } from 'semantic-ui-react'
 
 function BookCard({ book, openReviewsModal }) {
-  const imageStyle = {
-    width: '150px',
-    height: '200px',
-    marginBottom: '10px'
-  }
-
   const reviewButton = (
     book.bookReview && book.bookReview.error == null ? (
       <Button as='div' labelPosition='right' onClick={() => openReviewsModal && openReviewsModal(book)}>
@@ -26,8 +20,8 @@ function BookCard({ book, openReviewsModal }) {
 
   return (
     <Card>
+      <Image src={`http://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`} wrapped ui={false} />
       <Card.Content textAlign="center">
-        <Image style={imageStyle} src={`http://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`} />
         <Card.Header>{book.title}</Card.Header>
       </Card.Content>
       <Card.Content>

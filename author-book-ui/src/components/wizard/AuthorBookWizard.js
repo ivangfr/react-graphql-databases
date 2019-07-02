@@ -249,7 +249,7 @@ class AuthorBookWizard extends Component {
         headers: { 'Content-type': 'application/graphql' }
       })
       .then(() => {
-        this.props.history.push("/book")
+        this.props.history.push("/customer")
       })
       .catch(error => {
         console.log(error)

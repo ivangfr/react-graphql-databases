@@ -164,7 +164,6 @@ class Book extends Component {
   }
 
   editBook = (book) => {
-    console.log(book)
     const form = {
       id: book.id,
       isbn: book.isbn,

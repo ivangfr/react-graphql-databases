@@ -19,7 +19,7 @@ function BookList({ isLoading, books, openReviewsModal }) {
 
   return (
     books && books.length > 0 ? (
-      <Card.Group centered>
+      <Card.Group itemsPerRow={5} centered>
         {bookList}
       </Card.Group >
     ) : (
