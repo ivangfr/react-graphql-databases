@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid, Step, Icon, Button } from 'semantic-ui-react'
+import { Container, Grid, Responsive, Segment, Step, Icon, Button } from 'semantic-ui-react'
 import SearchStep from './SearchStep'
 import BookStep from './BookStep'
 import AuthorStep from './AuthorStep'
@@ -199,6 +199,7 @@ class AuthorBookWizard extends Component {
       return
     }
 
+    this.setState({ isLoading: true })
     const { authorName } = this.state
 
     authorBookApi.post('graphql',
@@ -212,7 +213,11 @@ class AuthorBookWizard extends Component {
       .then((response) => {
         this.fillAuthorDropdown()
         const authorId = response.data.data.createAuthor.id
-        this.setState({ authorId, authorName: '' })
+        this.setState({
+          isLoading: false,
+          authorId,
+          authorName: ''
+        })
       })
       .catch(error => {
         console.log(error)
@@ -295,9 +300,10 @@ class AuthorBookWizard extends Component {
       )
     }
     else if (step === 2) {
-      const { authorId, authorIdError, authorName, authorNameError, authorDropdown } = this.state
+      const { isLoading, authorId, authorIdError, authorName, authorNameError, authorDropdown } = this.state
       stepContent = (
         <AuthorStep
+          isLoading={isLoading}
           authorId={authorId}
           authorIdError={authorIdError}
           authorName={authorName}
@@ -346,40 +352,42 @@ class AuthorBookWizard extends Component {
     return (
       <Container>
         <Grid>
-          <Grid.Column width={4}>
-            <Step.Group vertical>
-              <Step active={step === 1}>
-                <Icon name='search' />
-                <Step.Content>
-                  <Step.Title>Search</Step.Title>
-                  <Step.Description>Search book</Step.Description>
-                </Step.Content>
-              </Step>
+          <Grid.Column mobile={16} tablet={16} computer={4}>
+            <Responsive as={Segment} {...Responsive.onlyComputer}>
+              <Step.Group vertical>
+                <Step active={step === 1}>
+                  <Icon name='search' />
+                  <Step.Content>
+                    <Step.Title>Search</Step.Title>
+                    <Step.Description>Search book</Step.Description>
+                  </Step.Content>
+                </Step>
 
-              <Step active={step === 2}>
-                <Icon name='user' />
-                <Step.Content>
-                  <Step.Title>Author</Step.Title>
-                  <Step.Description>Select or create author</Step.Description>
-                </Step.Content>
-              </Step>
+                <Step active={step === 2}>
+                  <Icon name='user' />
+                  <Step.Content>
+                    <Step.Title>Author</Step.Title>
+                    <Step.Description>Select or create author</Step.Description>
+                  </Step.Content>
+                </Step>
 
-              <Step active={step === 3}>
-                <Icon name='book' />
-                <Step.Content>
-                  <Step.Title>Book</Step.Title>
-                  <Step.Description>Check book information</Step.Description>
-                </Step.Content>
-              </Step>
+                <Step active={step === 3}>
+                  <Icon name='book' />
+                  <Step.Content>
+                    <Step.Title>Book</Step.Title>
+                    <Step.Description>Check book information</Step.Description>
+                  </Step.Content>
+                </Step>
 
-              <Step active={step === 4}>
-                <Icon name='flag checkered' />
-                <Step.Content>
-                  <Step.Title>Complete</Step.Title>
-                  <Step.Description>Preview and complete</Step.Description>
-                </Step.Content>
-              </Step>
-            </Step.Group>
+                <Step active={step === 4}>
+                  <Icon name='flag checkered' />
+                  <Step.Content>
+                    <Step.Title>Complete</Step.Title>
+                    <Step.Description>Preview and complete</Step.Description>
+                  </Step.Content>
+                </Step>
+              </Step.Group>
+            </Responsive>
 
             <Button.Group fluid>
               <Button
@@ -392,7 +400,7 @@ class AuthorBookWizard extends Component {
                 onClick={this.nextStep}>Next</Button>
             </Button.Group>
           </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column mobile={16} tablet={16} computer={12}>
             {stepContent}
           </Grid.Column>
         </Grid>

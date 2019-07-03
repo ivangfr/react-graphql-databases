@@ -1,9 +1,9 @@
 import React from 'react'
 import { Segment, Dropdown, Input, Form, Divider } from 'semantic-ui-react'
 
-function AuthorStep({ authorId, authorIdError, authorName, authorNameError, authorDropdown, handleChange, createAuthor, handleDropdownChange, handleDropdownSearchChange }) {
+function AuthorStep({ isLoading, authorId, authorIdError, authorName, authorNameError, authorDropdown, handleChange, createAuthor, handleDropdownChange, handleDropdownSearchChange }) {
   return (
-    <Segment>
+    <Segment loading={isLoading}>
       <Form>
         <Form.Group>
           <Form.Field inline error={authorNameError}>

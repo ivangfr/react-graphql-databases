@@ -205,7 +205,7 @@ class Book extends Component {
       <Container>
         <Header as='h3' textAlign='center'>Books</Header>
         <Grid>
-          <Grid.Column width={4}>
+          <Grid.Column mobile={16} tablet={16} computer={4}>
             <Segment>
               <BookForm
                 form={this.state.form}
@@ -218,7 +218,7 @@ class Book extends Component {
               />
             </Segment>
           </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column mobile={16} tablet={16} computer={12}>
             <Segment>
               <BookTable
                 books={this.state.books}

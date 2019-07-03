@@ -93,7 +93,7 @@ function ReviewModal({ modal, book, handleClose, handleChange, submitReview }) {
           <Grid item xs={12}>
             <form className={classes.root}>
               <Grid container spacing={3}>
-                <Grid item xs={9}>
+                <Grid item xs={12} md={9}>
                   <TextField
                     name="reviewer"
                     label="Reviewer"
@@ -105,7 +105,7 @@ function ReviewModal({ modal, book, handleClose, handleChange, submitReview }) {
                     error={modal.form.reviewerError}
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} md={3}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="rating">Rating</InputLabel>
                     <Select
@@ -121,7 +121,7 @@ function ReviewModal({ modal, book, handleClose, handleChange, submitReview }) {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={12} md={9}>
                   <TextField
                     name="comment"
                     label="Comment"
@@ -134,7 +134,7 @@ function ReviewModal({ modal, book, handleClose, handleChange, submitReview }) {
                     error={modal.form.commentError}
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} md={3}>
                   <Button
                     variant="contained"
                     color="primary"

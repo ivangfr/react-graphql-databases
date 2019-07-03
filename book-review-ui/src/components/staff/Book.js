@@ -133,7 +133,7 @@ class Staff extends Component {
     return (
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <BookForm
               form={form}
               handleChange={this.handleChange}
@@ -141,7 +141,7 @@ class Staff extends Component {
               saveBook={this.saveBook}
             />
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <BookTable
               books={books}
               deleteBook={this.deleteBook}

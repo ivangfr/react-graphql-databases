@@ -127,7 +127,7 @@ class Author extends Component {
       <Container>
         <Header as='h3' textAlign='center'>Authors</Header>
         <Grid>
-          <Grid.Column width={4}>
+          <Grid.Column mobile={16} tablet={16} computer={4}>
             <Segment>
               <AuthorForm
                 form={this.state.form}
@@ -137,7 +137,7 @@ class Author extends Component {
               />
             </Segment>
           </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column mobile={16} tablet={16} computer={12}>
             <Segment>
               <AuthorTable
                 authors={this.state.authors}
