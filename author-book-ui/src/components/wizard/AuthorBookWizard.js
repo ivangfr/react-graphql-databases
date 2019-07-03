@@ -11,12 +11,12 @@ import bookReviewApi from '../misc/book-review-api'
 class AuthorBookWizard extends Component {
   state = {
     step: 1,
-
+    isLoading: false,
+    
     // Search Step
     search: '',
     books: [],
     selectedBook: null,
-    isLoading: false,
 
     // Auhtor Step
     authorId: '',
@@ -352,8 +352,8 @@ class AuthorBookWizard extends Component {
     return (
       <Container>
         <Grid>
-          <Grid.Column mobile={16} tablet={16} computer={4}>
-            <Responsive as={Segment} {...Responsive.onlyComputer}>
+          <Grid.Column mobile={16} tablet={4} computer={4}>
+            <Responsive as={Segment} minWidth={768}>
               <Step.Group vertical>
                 <Step active={step === 1}>
                   <Icon name='search' />
@@ -400,7 +400,7 @@ class AuthorBookWizard extends Component {
                 onClick={this.nextStep}>Next</Button>
             </Button.Group>
           </Grid.Column>
-          <Grid.Column mobile={16} tablet={16} computer={12}>
+          <Grid.Column mobile={16} tablet={12} computer={12}>
             {stepContent}
           </Grid.Column>
         </Grid>
