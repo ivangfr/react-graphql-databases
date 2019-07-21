@@ -76,8 +76,8 @@ docker-compose -f docker-compose.yml -f /PATH/TO/SPRINGBOOT_GRAPHQL_DATABASES/do
 
 | Microservice     | URL                     |
 | ---------------- | ----------------------- |
-| `author-book-ui` | `http://localhost:8080` |
-| `book-review-ui` | `http://localhost:9080` |
+| `author-book-ui` | `http://localhost:3000` |
+| `book-review-ui` | `http://localhost:3001` |
 
 ## Demo
 
