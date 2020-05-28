@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from '@material-ui/core'
-import bookReviewApi from '../misc/book-review-api'
+import bookReviewApi from '../misc/BookReviewApi'
 import BookList from './BookList'
 import ReviewModal from './ReviewModal'
 

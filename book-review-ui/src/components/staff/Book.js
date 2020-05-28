@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Grid } from '@material-ui/core'
 import BookForm from './BookForm'
 import BookTable from './BookTable'
-import bookReviewApi from '../misc/book-review-api'
+import bookReviewApi from '../misc/BookReviewApi'
 
 class Staff extends Component {
   formInitialState = {

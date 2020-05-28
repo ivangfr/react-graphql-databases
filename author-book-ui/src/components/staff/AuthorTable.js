@@ -29,7 +29,7 @@ function AuthorTable({ authors, deleteAuthor, editAuthor }) {
   })
 
   return (
-    <Table compact striped>
+    <Table compact striped unstackable>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell />

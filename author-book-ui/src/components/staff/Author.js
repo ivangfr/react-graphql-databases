@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Grid, Segment, Header } from 'semantic-ui-react'
-import authorBookApi from '../misc/author-book-api'
+import { Container, Grid, Segment, Header, Divider } from 'semantic-ui-react'
+import authorBookApi from '../misc/AuthorBookApi'
 import AuthorTable from './AuthorTable'
 import AuthorForm from './AuthorForm'
 
@@ -38,8 +38,8 @@ class Author extends Component {
           }
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(response => {
         this.setState({
           authors: response.data.data.getAllAuthors
@@ -89,8 +89,8 @@ class Author extends Component {
           id
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(() => {
         this.getAllAuthors()
       })
@@ -125,10 +125,11 @@ class Author extends Component {
   render() {
     return (
       <Container>
-        <Header as='h3' textAlign='center'>Authors</Header>
         <Grid>
           <Grid.Column mobile={16} tablet={16} computer={4}>
             <Segment>
+              <Header as='h2' icon='user' content='Authors' />
+              <Divider />
               <AuthorForm
                 form={this.state.form}
                 handleChange={this.handleChange}

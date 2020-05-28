@@ -27,13 +27,19 @@ function SearchStep({ search, isLoading, books, selectedBook, handleChange, sear
       <Form onSubmit={searchBooks}>
         <Form.Group widths='equal'>
           <Form.Input
-            fluid
             placeholder='Search for a book title or an author name...'
             id='search'
             value={search}
             onChange={handleChange}
+            width={12}
+            fluid
           />
-          <Form.Button primary content='Search' />
+          <Form.Button
+            primary
+            content='Search'
+            width={4}
+            fluid
+          />
         </Form.Group>
       </Form>
 

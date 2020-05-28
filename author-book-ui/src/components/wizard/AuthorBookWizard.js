@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import { Container, Grid, Responsive, Segment, Step, Icon, Button } from 'semantic-ui-react'
+import { Container, Grid, Step, Icon, Button, Divider, Form, Checkbox } from 'semantic-ui-react'
 import SearchStep from './SearchStep'
 import BookStep from './BookStep'
 import AuthorStep from './AuthorStep'
 import CompleteStep from './CompleteStep'
-import openLibraryApi from '../misc/open-library-api'
-import authorBookApi from '../misc/author-book-api'
-import bookReviewApi from '../misc/book-review-api'
+import openLibraryApi from '../misc/OpenLibraryApi'
+import authorBookApi from '../misc/AuthorBookApi'
+import bookReviewApi from '../misc/BookReviewApi'
 
 class AuthorBookWizard extends Component {
   state = {
     step: 1,
     isLoading: false,
-    
+
     // Search Step
     search: '',
     books: [],
@@ -89,8 +89,9 @@ class AuthorBookWizard extends Component {
     this.setState({ [id]: value })
   }
 
-  handleCheckboxChange = (e, { bookReviewApiChecked }) => {
-    bookReviewApiChecked = this.state.bookReviewApiChecked === 'checked' ? 'unchecked' : 'checked'
+  handleCheckboxChange = (e, { value }) => {
+    let { bookReviewApiChecked } = this.state
+    bookReviewApiChecked = value === 'checked' ? 'unchecked' : 'checked'
     this.setState({ bookReviewApiChecked })
   }
 
@@ -111,8 +112,8 @@ class AuthorBookWizard extends Component {
           id
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(response => {
         if (response.data.data.getAuthorByName) {
           let authorId = response.data.data.getAuthorByName.id
@@ -173,8 +174,8 @@ class AuthorBookWizard extends Component {
           name
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(response => {
         const authors = response.data.data.getAllAuthors
         const options = authors.map(author => {
@@ -208,8 +209,8 @@ class AuthorBookWizard extends Component {
           id
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then((response) => {
         this.fillAuthorDropdown()
         const authorId = response.data.data.createAuthor.id
@@ -234,8 +235,8 @@ class AuthorBookWizard extends Component {
         id
       }
     }`, {
-          headers: { 'Content-type': 'application/graphql' }
-        })
+        headers: { 'Content-type': 'application/graphql' }
+      })
         .then((response) => {
           const { id } = response.data.data.createBook
           console.log(`Book created successfully in book-review-api, id: ${id}`)
@@ -251,8 +252,8 @@ class AuthorBookWizard extends Component {
         id
       }
     }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(() => {
         this.props.history.push("/customer")
       })
@@ -329,7 +330,7 @@ class AuthorBookWizard extends Component {
         />
       )
     } else if (step === 4) {
-      const { isbn, title, authorId, year, authorDropdown, bookReviewApiChecked } = this.state
+      const { isbn, title, authorId, year, authorDropdown } = this.state
       const name = authorDropdown.options.filter(a => a['key'] === authorId)[0]['text']
       const book = {
         isbn: isbn,
@@ -338,56 +339,50 @@ class AuthorBookWizard extends Component {
         author: { name }
       }
       stepContent = (
-        <CompleteStep
-          book={book}
-          bookReviewApiChecked={bookReviewApiChecked}
-          createBook={this.createBook}
-          handleCheckboxChange={this.handleCheckboxChange}
-        />
+        <CompleteStep book={book} />
       )
     } else {
       stepContent = null
     }
 
+    const { bookReviewApiChecked } = this.state
     return (
       <Container>
-        <Grid>
+        <Grid columns={2}>
           <Grid.Column mobile={16} tablet={4} computer={4}>
-            <Responsive as={Segment} minWidth={768}>
-              <Step.Group vertical>
-                <Step active={step === 1}>
-                  <Icon name='search' />
-                  <Step.Content>
-                    <Step.Title>Search</Step.Title>
-                    <Step.Description>Search book</Step.Description>
-                  </Step.Content>
-                </Step>
+            <Step.Group vertical unstackable>
+              <Step active={step === 1}>
+                <Icon name='search' />
+                <Step.Content>
+                  <Step.Title>Search</Step.Title>
+                  <Step.Description>Search book</Step.Description>
+                </Step.Content>
+              </Step>
 
-                <Step active={step === 2}>
-                  <Icon name='user' />
-                  <Step.Content>
-                    <Step.Title>Author</Step.Title>
-                    <Step.Description>Select or create author</Step.Description>
-                  </Step.Content>
-                </Step>
+              <Step active={step === 2}>
+                <Icon name='user' />
+                <Step.Content>
+                  <Step.Title>Author</Step.Title>
+                  <Step.Description>Select or create author</Step.Description>
+                </Step.Content>
+              </Step>
 
-                <Step active={step === 3}>
-                  <Icon name='book' />
-                  <Step.Content>
-                    <Step.Title>Book</Step.Title>
-                    <Step.Description>Check book information</Step.Description>
-                  </Step.Content>
-                </Step>
+              <Step active={step === 3}>
+                <Icon name='book' />
+                <Step.Content>
+                  <Step.Title>Book</Step.Title>
+                  <Step.Description>Check book information</Step.Description>
+                </Step.Content>
+              </Step>
 
-                <Step active={step === 4}>
-                  <Icon name='flag checkered' />
-                  <Step.Content>
-                    <Step.Title>Complete</Step.Title>
-                    <Step.Description>Preview and complete</Step.Description>
-                  </Step.Content>
-                </Step>
-              </Step.Group>
-            </Responsive>
+              <Step active={step === 4}>
+                <Icon name='flag checkered' />
+                <Step.Content>
+                  <Step.Title>Complete</Step.Title>
+                  <Step.Description>Preview and complete</Step.Description>
+                </Step.Content>
+              </Step>
+            </Step.Group>
 
             <Button.Group fluid>
               <Button
@@ -399,7 +394,30 @@ class AuthorBookWizard extends Component {
                 disabled={step === 4}
                 onClick={this.nextStep}>Next</Button>
             </Button.Group>
+
+            {step === 4 && (
+              <>
+                <Divider />
+                <Form>
+                  <Form.Field>
+                    <Checkbox
+                      toggle
+                      id='bookReviewApiChecked'
+                      value={bookReviewApiChecked}
+                      label='Create book in book-review-api'
+                      onChange={this.handleCheckboxChange}
+                    />
+                  </Form.Field>
+                  <Form.Button
+                    fluid
+                    primary
+                    onClick={this.createBook}
+                  >Create</Form.Button>
+                </Form>
+              </>
+            )}
           </Grid.Column>
+
           <Grid.Column mobile={16} tablet={12} computer={12}>
             {stepContent}
           </Grid.Column>

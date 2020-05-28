@@ -31,7 +31,7 @@ function BookTable({ books, deleteBook, editBook }) {
   })
   
   return (
-    <Table compact striped>
+    <Table compact striped unstackable>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell />

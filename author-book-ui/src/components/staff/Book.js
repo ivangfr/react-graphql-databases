@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Grid, Segment, Header } from 'semantic-ui-react'
-import authorBookApi from '../misc/author-book-api'
+import { Container, Grid, Segment, Header, Divider } from 'semantic-ui-react'
+import authorBookApi from '../misc/AuthorBookApi'
 import BookTable from './BookTable'
 import BookForm from './BookForm'
 
@@ -66,8 +66,8 @@ class Book extends Component {
           name
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(response => {
         const authors = response.data.data.getAllAuthors
         const options = authors.map(author => {
@@ -101,8 +101,8 @@ class Book extends Component {
           }
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(response => {
         this.setState({
           books: response.data.data.getAllBooks
@@ -153,8 +153,8 @@ class Book extends Component {
           id
         }
       }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      headers: { 'Content-type': 'application/graphql' }
+    })
       .then(() => {
         this.getAllBooks()
       })
@@ -203,10 +203,11 @@ class Book extends Component {
   render() {
     return (
       <Container>
-        <Header as='h3' textAlign='center'>Books</Header>
         <Grid>
           <Grid.Column mobile={16} tablet={16} computer={4}>
             <Segment>
+              <Header as='h2' icon='book' content='Books' />
+              <Divider />
               <BookForm
                 form={this.state.form}
                 authorDropdown={this.state.authorDropdown}
@@ -219,13 +220,11 @@ class Book extends Component {
             </Segment>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={12}>
-            <Segment>
-              <BookTable
-                books={this.state.books}
-                deleteBook={this.deleteBook}
-                editBook={this.editBook}
-              />
-            </Segment>
+            <BookTable
+              books={this.state.books}
+              deleteBook={this.deleteBook}
+              editBook={this.editBook}
+            />
           </Grid.Column>
         </Grid>
       </Container>

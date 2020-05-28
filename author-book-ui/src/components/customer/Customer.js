@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Container } from 'semantic-ui-react'
 import BookList from './BookList'
 import ReviewModal from './ReviewModal'
-import authorBookApi from '../misc/author-book-api'
-import bookReviewApi from '../misc/book-review-api'
+import authorBookApi from '../misc/AuthorBookApi'
+import bookReviewApi from '../misc/BookReviewApi'
 
 class Customer extends Component {
   formInitialState = {

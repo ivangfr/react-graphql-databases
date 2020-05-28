@@ -1,5 +1,5 @@
 # => Build container
-FROM node:13.1.0-alpine as build
+FROM node:14.3.0-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
@@ -9,7 +9,7 @@ COPY . /app
 RUN npm run build
 
 # => Run container
-FROM nginx:1.17.6-alpine
+FROM nginx:1.18.0-alpine
 
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
@@ -26,8 +26,8 @@ WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
 COPY .env .
 
-# Add bash
-RUN apk add --no-cache bash
+# Add bash and curl
+RUN apk add --no-cache bash curl
 
 # Make our shell script executable
 RUN chmod +x env.sh

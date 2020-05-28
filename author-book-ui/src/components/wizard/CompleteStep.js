@@ -1,28 +1,12 @@
 import React from 'react'
-import { Segment, Form, Checkbox } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import BookCard from '../customer/BookCard'
 
-function CompleteStep({ book, createBook, bookReviewApiChecked, handleCheckboxChange }) {
+function CompleteStep({ book }) {
   return (
-    <Segment compact>
+    <Card.Group doubling centered>
       <BookCard book={book} />
-      <Form>
-        <Form.Field>
-          <Checkbox
-            toggle
-            id='bookReviewApiChecked'
-            value={bookReviewApiChecked}
-            label='Create book in book-review-api'
-            onChange={handleCheckboxChange}
-          />
-        </Form.Field>
-        <Form.Button
-          fluid
-          primary
-          onClick={createBook}
-        >Create</Form.Button>
-      </Form>
-    </Segment>
+    </Card.Group>
   )
 }
 
