@@ -18,14 +18,15 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
 
 ## Prerequisites
 
-In order to run this project, you must have [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases). So, follow the steps:
+- [`npm`](https://www.npmjs.com/get-npm)
+- [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases)
 
-- In a terminal, run the command below to clone `springboot-graphql-databases` project
-  ```
-  git clone https://github.com/ivangfr/springboot-graphql-databases.git
-  ```
+  - In a terminal, run the command below to clone `springboot-graphql-databases` project
+    ```
+    git clone https://github.com/ivangfr/springboot-graphql-databases.git
+    ```
 
-- Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-docker-images
+  - Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-docker-images
 
 ## Running ReactJS apps with Npm
 
