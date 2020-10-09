@@ -8,11 +8,11 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
 
 ## Applications
 
-- **author-book-ui**
+- ### author-book-ui
 
   `ReactJS` UI application where **staff members** can manage authors and books and **customers** can see the books and read/add book reviews and their rating. Its main backend application is `author-book-api` but all the reviews information are obtained from `book-review-api`. It uses [`Semantic UI React`](https://react.semantic-ui.com/) as CSS-styled framework.
 
-- **book-review-ui**
+- ### book-review-ui
 
   `ReactJS` UI application where **staff members** can manage books and **customers** can see the books and read/add book reviews and their rating. Its backend application is `book-review-api`. It uses [`Material UI`](https://material-ui.com/) as CSS-styled framework. 
 
@@ -140,7 +140,7 @@ Add the line below to `/etc/hosts`
 
 ## How to upgrade application's dependencies to latest version
 
-- In a terminal, make sure you are inside `springboot-react-keycloak/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder
+- In a terminal, make sure you are inside `react-graphql-databases/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder
 
 - Run the following commands
   ```
