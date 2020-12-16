@@ -1,15 +1,16 @@
 # => Build container
-FROM node:14.3.0-alpine as build
+FROM node:15.4.0-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json /app/package.json
-RUN npm install --silent
-RUN npm install react-scripts@3.0.1 -g --silent
-COPY . /app
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
+RUN npm install react-scripts@4.0.1 -g --silent
+COPY . ./
 RUN npm run build
 
 # => Run container
-FROM nginx:1.18.0-alpine
+FROM nginx:1.19.6-alpine
 
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
