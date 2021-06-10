@@ -26,43 +26,45 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
     git clone https://github.com/ivangfr/springboot-graphql-databases.git
     ```
 
-  - Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-docker-images
+  - Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-applications-docker-images
 
-## Running ReactJS apps with Npm
+## Run Applications with Npm
 
-- First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running applications with Maven](https://github.com/ivangfr/springboot-graphql-databases#running-applications-with-maven)
+### Start Environment and Backend Applications
 
-- Run the frontend applications with [`Npm`](https://www.npmjs.com/).
+First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running applications with Maven](https://github.com/ivangfr/springboot-graphql-databases#run-applications-with-maven)
 
-  - **author-book-ui**
+### Start Applications
 
-    - Open a new terminal and go to `react-graphql-databases/author-book-ui`
+- **author-book-ui**
 
-    - Execute the command below if you are running `author-book-ui` for the first time
-      ```
-      npm install
-      ```
+  - Open a new terminal and go to `react-graphql-databases/author-book-ui`
 
-    - To start `author-book-ui` run
-      ```
-      npm start
-      ```
+  - Execute the command below if you are running `author-book-ui` for the first time
+    ```
+    npm install
+    ```
 
-  - **book-review-ui**
+  - To start `author-book-ui` run
+    ```
+    npm start
+    ```
 
-    - Open a new terminal and go to `react-graphql-databases/book-review-ui`
+- **book-review-ui**
 
-    - Execute the command below if you are running `book-review-ui` for the first time
-      ```
-      npm install
-      ```
+  - Open a new terminal and go to `react-graphql-databases/book-review-ui`
 
-    - To start `book-review-ui` run
-      ```
-      npm start
-      ```
+  - Execute the command below if you are running `book-review-ui` for the first time
+    ```
+    npm install
+    ```
 
-## Running ReactJS apps as Docker Containers
+  - To start `book-review-ui` run
+    ```
+    npm start
+    ```
+
+## Run Applications as Docker Containers
 
 ### Build Docker Images
 
@@ -70,7 +72,7 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
 
   In a terminal and inside `react-graphql-databases/author-book-ui`, run the following command
   ```
-  docker build -f Dockerfile -t docker.mycompany.com/author-book-ui:1.0.0 .
+  docker build -f Dockerfile -t ivanfranchin/author-book-ui:1.0.0 .
   ```
 
   | Environment Variable   | Description                                                         |
@@ -84,7 +86,7 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
 
   In a terminal and inside `react-graphql-databases/book-review-ui`, run the following command
   ```
-  docker build -f Dockerfile -t docker.mycompany.com/book-review-ui:1.0.0 .
+  docker build -f Dockerfile -t ivanfranchin/book-review-ui:1.0.0 .
   ```
 
   | Environment Variable   | Description                                                         |
@@ -99,11 +101,15 @@ Add the line below to `/etc/hosts`
 127.0.0.1 author-book-api book-review-api
 ```
 
-### Start environment
+### Start Environment and Backend Applications
 
-- First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running Applications as Docker containers](https://github.com/ivangfr/springboot-graphql-databases#running-appplications-as-docker-containers)
+First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running Applications as Docker containers](https://github.com/ivangfr/springboot-graphql-databases#run-applications-as-docker-containers)
 
-- In a terminal, make sure you are inside `react-graphql-databases` root folder. Then, run following script
+### Start Applications
+
+- In a terminal, make sure you are inside `react-graphql-databases` root folder
+
+- Run following script
   ```
   ./start-apps.sh
   ```
@@ -128,14 +134,11 @@ Add the line below to `/etc/hosts`
 ## Shutdown
 
 - Stop applications
-
   - If they were started with `Npm`, go to the terminals where they are running and press `Ctrl+C`
-  
   - If they were started as a Docker container, inside `react-graphql-databases` root folder, run the script below
     ```
     ./stop-apps.sh
     ```
-
 - Finally, follow the shutdown steps for backend applications as described at [Shutdown](https://github.com/ivangfr/springboot-graphql-databases#shutdown)
 
 ## How to upgrade application's dependencies to latest version
