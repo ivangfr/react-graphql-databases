@@ -133,13 +133,23 @@ First, you need to start the environment and backend applications. For it, follo
 
 ## Shutdown
 
-- Stop applications
+- To stop applications
+
   - If they were started with `Npm`, go to the terminals where they are running and press `Ctrl+C`
-  - If they were started as a Docker container, inside `react-graphql-databases` root folder, run the script below
+
+  - If they were started as a Docker container, go to a terminal and, inside `react-graphql-databases` root folder, run the script below
     ```
     ./stop-apps.sh
     ```
+
 - Finally, follow the shutdown steps for backend applications as described at [Shutdown](https://github.com/ivangfr/springboot-graphql-databases#shutdown)
+
+## Cleanup
+
+To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script
+```
+./remove-docker-images.sh
+```
 
 ## How to upgrade application's dependencies to latest version
 

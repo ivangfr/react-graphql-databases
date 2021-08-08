@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo
-echo "Starting author-book-ui..."
+echo "Starting author-book-ui ..."
 
 docker run -d --rm --name author-book-ui -p 3000:80 \
   -e AUTHOR_BOOK_API_HOST=author-book-api -e BOOK_REVIEW_API_HOST=book-review-api \
@@ -10,7 +10,7 @@ docker run -d --rm --name author-book-ui -p 3000:80 \
   ivanfranchin/author-book-ui:1.0.0
 
 echo
-echo "Starting book-review-ui..."
+echo "Starting book-review-ui ..."
 
 docker run -d --rm --name book-review-ui -p 3001:80 \
   -e BOOK_REVIEW_API_HOST=book-review-api \
