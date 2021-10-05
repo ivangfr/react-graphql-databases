@@ -146,10 +146,15 @@ First, you need to start the environment and backend applications. For it, follo
 
 ## Cleanup
 
-To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script
-```
-./remove-docker-images.sh
-```
+- To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script
+  ```
+  ./remove-docker-images.sh
+  ```
+
+- Remove the line below from `/etc/hosts`
+  ```
+  127.0.0.1 author-book-api book-review-api
+  ```
 
 ## How to upgrade application's dependencies to latest version
 
