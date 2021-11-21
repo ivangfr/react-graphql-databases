@@ -18,7 +18,7 @@ The goal of this project is to implement two **frontend** [`ReactJS`](https://re
 
 ## Prerequisites
 
-- [`npm`](https://www.npmjs.com/get-npm)
+- [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases)
 
   - In a terminal, run the command below to clone `springboot-graphql-databases` project
