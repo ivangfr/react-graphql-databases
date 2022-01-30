@@ -162,6 +162,7 @@ First, you need to start the environment and backend applications. For it, follo
 
 - Run the following commands
   ```
+  npm upgrade
   npm i -g npm-check-updates
   ncu -u
   npm install
