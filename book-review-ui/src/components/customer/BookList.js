@@ -45,7 +45,7 @@ function BookList({ isLoading, books, openReviewsModal }) {
             <Typography gutterBottom variant="caption">ISBN: {book.isbn}</Typography>
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <Badge color="primary" badgeContent={book.reviews.length} className={classes.badge}>
+            <Badge color="primary" badgeContent={book.reviews.length} className={classes.badge} overlap="rectangular">
               <Button
                 variant="outlined"
                 size="small"
