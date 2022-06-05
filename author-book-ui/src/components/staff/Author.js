@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Grid, Segment, Header, Divider } from 'semantic-ui-react'
-import authorBookApi from '../misc/AuthorBookApi'
+import { authorBookApi } from '../misc/AuthorBookApi'
 import AuthorTable from './AuthorTable'
 import AuthorForm from './AuthorForm'
 
@@ -17,7 +17,7 @@ class Author extends Component {
   }
 
   componentDidMount() {
-    this.getAllAuthors()
+    this.getAuthors()
   }
 
   handleChange = (e) => {
@@ -27,27 +27,20 @@ class Author extends Component {
     this.setState({ form })
   }
 
-  getAllAuthors = () => {
-    authorBookApi.post('graphql',
-      `{
-        getAllAuthors {
-          id
-          name
-          books {
-            title
-          }
+  getAuthors = () => {
+    const query = `{
+      getAuthors {
+        id
+        name
+        books {
+          title
         }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
-      .then(response => {
-        this.setState({
-          authors: response.data.data.getAllAuthors
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      }
+    }`
+
+    authorBookApi.call(query)
+      .then(response => this.setState({ authors: response.data.data.getAuthors }))
+      .catch(error => console.log(error))
   }
 
   saveAuthor = () => {
@@ -56,47 +49,40 @@ class Author extends Component {
     }
 
     const { id, name } = this.state.form
-    let request
+    let query
     if (id) {
-      request = `mutation {
+      query = `mutation {
         updateAuthor ( authorId: ${id}, authorInput: { name: "${name}" } ) {
           id
         }
       }`
     } else {
-      request = `mutation {
+      query = `mutation {
         createAuthor ( authorInput: { name:"${name}" } ) {
           id
         }
       }`
     }
-    authorBookApi.post('graphql', request, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    authorBookApi.call(query)
       .then(() => {
         this.clearForm()
-        this.getAllAuthors()
+        this.getAuthors()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   deleteAuthor = (id) => {
-    authorBookApi.post('graphql',
-      `mutation {
-        deleteAuthor(authorId: ${id}) {
-          id
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `mutation {
+      deleteAuthor(authorId: ${id}) {
+        id
+      }
+    }`
+
+    authorBookApi.call(query)
       .then(() => {
-        this.getAllAuthors()
+        this.getAuthors()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   editAuthor = (author) => {

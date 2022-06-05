@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Container } from 'semantic-ui-react'
 import BookList from './BookList'
 import ReviewModal from './ReviewModal'
-import authorBookApi from '../misc/AuthorBookApi'
-import bookReviewApi from '../misc/BookReviewApi'
+import { authorBookApi } from '../misc/AuthorBookApi'
+import { bookReviewApi } from '../misc/BookReviewApi'
 
 class Customer extends Component {
   formInitialState = {
@@ -25,7 +25,7 @@ class Customer extends Component {
   }
 
   componentDidMount() {
-    this.getAllBooks()
+    this.getBooks()
   }
 
   handleChange = (e) => {
@@ -41,12 +41,11 @@ class Customer extends Component {
     this.setState({ modal })
   }
 
-  getAllBooks = () => {
+  getBooks = () => {
     this.setState({ isLoading: true })
 
-    authorBookApi.post('graphql',
-      `{
-      getAllBooks {
+    const query = `{
+      getBooks {
         id
         title
         isbn
@@ -65,23 +64,15 @@ class Customer extends Component {
           }
         }
       }
-    }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
-      .then(response => {
-        this.setState({
-          isLoading: false,
-          books: response.data.data.getAllBooks
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    }`
+
+    authorBookApi.call(query)
+      .then(response => this.setState({ isLoading: false, books: response.data.data.getBooks }))
+      .catch(error => console.log(error))
   }
 
   getBookById = (id) => {
-    authorBookApi.post('graphql',
-      `{
+    const query = `{
       getBookById(bookId: ${id}) {
         id
         title
@@ -101,17 +92,11 @@ class Customer extends Component {
           }
         }
       }
-    }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
-      .then(response => {
-        this.setState({
-          book: response.data.data.getBookById
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    }`
+
+    authorBookApi.call(query)
+      .then(response => this.setState({ book: response.data.data.getBookById }))
+      .catch(error => console.log(error))
   }
 
   submitReview = () => {
@@ -121,22 +106,20 @@ class Customer extends Component {
 
     const bookId = this.state.book.bookReview.id
     const { reviewer, comment, rating } = this.state.modal.form
-    bookReviewApi.post('graphql',
-      `mutation {
-        addBookReview(bookId: "${bookId}", reviewInput: {reviewer: "${reviewer}", comment: "${comment}", rating: ${rating}}) {
-          id
-        }
-      }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+
+    const query = `mutation {
+      addBookReview(bookId: "${bookId}", reviewInput: {reviewer: "${reviewer}", comment: "${comment}", rating: ${rating}}) {
+        id
+      }
+    }`
+
+    bookReviewApi.call(query)
       .then(() => {
         this.getBookById(this.state.book.id)
-        this.getAllBooks()
+        this.getBooks()
         this.clearForm()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   clearForm = () => {

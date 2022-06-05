@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Grid } from '@material-ui/core'
 import BookForm from './BookForm'
 import BookTable from './BookTable'
-import bookReviewApi from '../misc/BookReviewApi'
+import { bookReviewApi } from '../misc/BookReviewApi'
 
 class Staff extends Component {
   formInitialState = {
@@ -19,7 +19,7 @@ class Staff extends Component {
   }
 
   componentDidMount() {
-    this.getAllBooks()
+    this.getBooks()
   }
 
   handleChange = (e) => {
@@ -29,25 +29,18 @@ class Staff extends Component {
     this.setState({ form })
   }
 
-  getAllBooks = () => {
-    bookReviewApi.post('graphql',
-      `{
-        getAllBooks {
-          id
-          isbn
-          title
-        }
-      }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
-      .then(response => {
-        this.setState({
-          books: response.data.data.getAllBooks
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  getBooks = () => {
+    const query = `{
+      getBooks {
+        id
+        isbn
+        title
+      }
+    }`
+
+    bookReviewApi.call(query)
+      .then(response => this.setState({ books: response.data.data.getBooks }))
+      .catch(error => console.log(error))
   }
 
   saveBook = () => {
@@ -57,48 +50,41 @@ class Staff extends Component {
 
     const { id, isbn, title } = this.state.form
 
-    let request
+    let query
     if (id) {
-      request = `mutation {
+      query = `mutation {
         updateBook(bookId: "${id}", bookInput: {isbn: "${isbn}", title: "${title}"}) {
           id
         }
       }`
     } else {
-      request = `mutation {
+      query = `mutation {
         createBook(bookInput: {isbn: "${isbn}", title: "${title}"}) {
           id
         }
       }`
     }
 
-    bookReviewApi.post('graphql', request, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    bookReviewApi.call(query)
       .then(() => {
         this.clearForm()
-        this.getAllBooks()
+        this.getBooks()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   deleteBook = (id) => {
-    bookReviewApi.post('graphql',
-      `mutation {
-        deleteBook(bookId: "${id}") {
-          id
-        }
-      }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+    const query = `mutation {
+      deleteBook(bookId: "${id}") {
+        id
+      }
+    }`
+
+    bookReviewApi.call(query)
       .then(() => {
-        this.getAllBooks()
+        this.getBooks()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   editBook = (book) => {

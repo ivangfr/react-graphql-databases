@@ -5,8 +5,8 @@ import BookStep from './BookStep'
 import AuthorStep from './AuthorStep'
 import CompleteStep from './CompleteStep'
 import openLibraryApi from '../misc/OpenLibraryApi'
-import authorBookApi from '../misc/AuthorBookApi'
-import bookReviewApi from '../misc/BookReviewApi'
+import { authorBookApi } from '../misc/AuthorBookApi'
+import { bookReviewApi } from '../misc/BookReviewApi'
 
 class AuthorBookWizard extends Component {
   state = {
@@ -106,25 +106,22 @@ class AuthorBookWizard extends Component {
   }
 
   getAuthorByName = (authorName) => {
-    authorBookApi.post('graphql',
-      `{
-        getAuthorByName(authorName: "${authorName}") {
-          id
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `{
+      getAuthorByName(authorName: "${authorName}") {
+        id
+      }
+    }`
+
+    authorBookApi.call(query)
       .then(response => {
-        if (response.data.data.getAuthorByName) {
-          let authorId = response.data.data.getAuthorByName.id
+        if (response.data.data.getAuthorByName.length > 0) {
+          let authorId = response.data.data.getAuthorByName[0].id
           this.setState({ authorId })
         } else {
           this.setState({ authorName })
         }
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   handleTableSelection = (book) => {
@@ -157,9 +154,7 @@ class AuthorBookWizard extends Component {
           })
         this.setState({ books, isLoading: false })
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   fillAuthorDropdown = () => {
@@ -167,17 +162,16 @@ class AuthorBookWizard extends Component {
     authorDropdown.isFetching = true
     this.setState({ authorDropdown })
 
-    authorBookApi.post('graphql',
-      `{
-        getAllAuthors {
-          id
-          name
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `{
+      getAuthors {
+        id
+        name
+      }
+    }`
+
+    authorBookApi.call(query)
       .then(response => {
-        const authors = response.data.data.getAllAuthors
+        const authors = response.data.data.getAuthors
         const options = authors.map(author => {
           return {
             "key": author.id,
@@ -190,9 +184,7 @@ class AuthorBookWizard extends Component {
         authorDropdown.isFetching = false
         this.setState({ authorDropdown })
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   createAuthor = () => {
@@ -203,14 +195,13 @@ class AuthorBookWizard extends Component {
     this.setState({ isLoading: true })
     const { authorName } = this.state
 
-    authorBookApi.post('graphql',
-      `mutation {
-        createAuthor ( authorInput: { name:"${authorName}" } ) {
-          id
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `mutation {
+      createAuthor ( authorInput: { name:"${authorName}" } ) {
+        id
+      }
+    }`
+
+    authorBookApi.call(query)
       .then((response) => {
         this.fillAuthorDropdown()
         const authorId = response.data.data.createAuthor.id
@@ -220,46 +211,38 @@ class AuthorBookWizard extends Component {
           authorName: ''
         })
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   createBook = () => {
     const { isbn, authorId, title, year, bookReviewApiChecked } = this.state
 
     if (bookReviewApiChecked === 'checked') {
-      bookReviewApi.post('graphql',
-        `mutation {
-      createBook(bookInput: {isbn: "${isbn}", title: "${title}"}) {
-        id
-      }
-    }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      const query = `mutation {
+        createBook(bookInput: {isbn: "${isbn}", title: "${title}"}) {
+          id
+        }
+      }`
+
+      bookReviewApi.call(query)
         .then((response) => {
           const { id } = response.data.data.createBook
           console.log(`Book created successfully in book-review-api, id: ${id}`)
         })
-        .catch(error => {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
     }
 
-    authorBookApi.post('graphql',
-      `mutation {
+    const query = `mutation {
       createBook(bookInput: {isbn: "${isbn}", title: "${title}", authorId: ${authorId}, year: ${year}}) {
         id
       }
-    }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    }`
+
+    authorBookApi.call(query)
       .then(() => {
         this.props.history.push("/customer")
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   isValidAuthorForm = () => {

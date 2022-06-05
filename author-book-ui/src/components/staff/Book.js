@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Grid, Segment, Header, Divider } from 'semantic-ui-react'
-import authorBookApi from '../misc/AuthorBookApi'
+import { authorBookApi } from '../misc/AuthorBookApi'
 import BookTable from './BookTable'
 import BookForm from './BookForm'
 
@@ -10,7 +10,7 @@ class Book extends Component {
     isbn: '',
     authorId: '',
     title: '',
-    year: 2019,
+    year: 2022,
 
     isbnError: false,
     titleError: false,
@@ -32,7 +32,7 @@ class Book extends Component {
 
   componentDidMount() {
     this.fillAuthorDropdown()
-    this.getAllBooks()
+    this.getBooks()
   }
 
   handleChange = (e) => {
@@ -59,17 +59,16 @@ class Book extends Component {
     authorDropdown.isFetching = true
     this.setState({ authorDropdown })
 
-    authorBookApi.post('graphql',
-      `{
-        getAllAuthors {
-          id
-          name
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `{
+      getAuthors {
+        id
+        name
+      }
+    }`
+
+    authorBookApi.call(query)
       .then(response => {
-        const authors = response.data.data.getAllAuthors
+        const authors = response.data.data.getAuthors
         const options = authors.map(author => {
           return {
             "key": author.id,
@@ -82,35 +81,26 @@ class Book extends Component {
         authorDropdown.isFetching = false
         this.setState({ authorDropdown })
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
-  getAllBooks = () => {
-    authorBookApi.post('graphql',
-      `{
-        getAllBooks {
+  getBooks = () => {
+    const query = `{
+      getBooks {
+        id
+        isbn
+        title
+        year
+        author {
           id
-          isbn
-          title
-          year
-          author {
-            id
-            name
-          }
+          name
         }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
-      .then(response => {
-        this.setState({
-          books: response.data.data.getAllBooks
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      }
+    }`
+
+    authorBookApi.call(query)
+      .then(response => this.setState({ books: response.data.data.getBooks }))
+      .catch(error => console.log(error))
   }
 
   saveBook = () => {
@@ -119,48 +109,41 @@ class Book extends Component {
     }
 
     const { id, isbn, authorId, title, year } = this.state.form
-    let request
+    let query
     if (id) {
-      request = `mutation {
+      query = `mutation {
         updateBook(bookId: ${id}, bookInput: {isbn: "${isbn}", title: "${title}", authorId: ${authorId}, year: ${year}}) {
           id
         }
       }`
     } else {
-      request = `mutation {
+      query = `mutation {
         createBook(bookInput: {isbn: "${isbn}", title: "${title}", authorId: ${authorId}, year: ${year}}) {
           id
         }
       }`
     }
 
-    authorBookApi.post('graphql', request, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    authorBookApi.call(query)
       .then(() => {
         this.clearForm()
-        this.getAllBooks()
+        this.getBooks()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   deleteBook = (id) => {
-    authorBookApi.post('graphql',
-      `mutation {
-        deleteBook(bookId: ${id}) {
-          id
-        }
-      }`, {
-      headers: { 'Content-type': 'application/graphql' }
-    })
+    const query = `mutation {
+      deleteBook(bookId: ${id}) {
+        id
+      }
+    }`
+
+    authorBookApi.call(query)
       .then(() => {
-        this.getAllBooks()
+        this.getBooks()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   editBook = (book) => {

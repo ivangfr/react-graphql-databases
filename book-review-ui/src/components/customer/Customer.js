@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from '@material-ui/core'
-import bookReviewApi from '../misc/BookReviewApi'
+import { bookReviewApi } from '../misc/BookReviewApi'
 import BookList from './BookList'
 import ReviewModal from './ReviewModal'
 
@@ -24,7 +24,7 @@ class Customer extends Component {
   }
 
   componentDidMount() {
-    this.getAllBooks()
+    this.getBooks()
   }
 
   handleChange = (e) => {
@@ -34,12 +34,11 @@ class Customer extends Component {
     this.setState({ modal })
   }
 
-  getAllBooks = () => {
+  getBooks = () => {
     this.setState({ isLoading: true })
 
-    bookReviewApi.post('graphql',
-      `{
-      getAllBooks {
+    const query = `{
+      getBooks {
         id
         isbn
         title
@@ -50,18 +49,11 @@ class Customer extends Component {
           createdAt
         }
       }
-    }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
-      .then(response => {
-        this.setState({
-          isLoading: false,
-          books: response.data.data.getAllBooks
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    }`
+
+    bookReviewApi.call(query)
+      .then(response => this.setState({ isLoading: false, books: response.data.data.getBooks }))
+      .catch(error => console.log(error))
   }
 
   submitReview = () => {
@@ -71,32 +63,28 @@ class Customer extends Component {
 
     const { id } = this.state.book
     const { reviewer, comment, rating } = this.state.modal.form
-    bookReviewApi.post('graphql',
-      `mutation {
-        addBookReview(bookId: "${id}", reviewInput: {reviewer: "${reviewer}", comment: "${comment}", rating: ${rating}}) {
-          id
-          isbn
-          title
-          reviews {
-            reviewer
-            comment
-            rating
-            createdAt
-          }
+
+    const query = `mutation {
+      addBookReview(bookId: "${id}", reviewInput: {reviewer: "${reviewer}", comment: "${comment}", rating: ${rating}}) {
+        id
+        isbn
+        title
+        reviews {
+          reviewer
+          comment
+          rating
+          createdAt
         }
-      }`, {
-        headers: { 'Content-type': 'application/graphql' }
-      })
+      }
+    }`
+
+    bookReviewApi.call(query)
       .then(response => {
-        this.setState({
-          book: response.data.data.addBookReview
-        })
-        this.getAllBooks()
+        this.setState({ book: response.data.data.addBookReview })
+        this.getBooks()
         this.clearForm()
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch(error => console.log(error))
   }
 
   isValidForm = () => {
