@@ -66,14 +66,16 @@ First, you need to start the environment and backend applications. For it, follo
 
 ## Run Applications as Docker Containers
 
-### Build Docker Images
+### Build Application's Docker Images
+
+In a terminal and inside `react-graphql-databases` root folder, run the following script
+```
+./docker-build.sh
+```
+
+### Application's environment variables
 
 - **author-book-ui**
-
-  In a terminal and inside `react-graphql-databases/author-book-ui`, run the following command
-  ```
-  docker build -f Dockerfile -t ivanfranchin/author-book-ui:1.0.0 .
-  ```
 
   | Environment Variable   | Description                                                         |
   | ---------------------- | ------------------------------------------------------------------- |
@@ -83,11 +85,6 @@ First, you need to start the environment and backend applications. For it, follo
   | `BOOK_REVIEW_API_PORT` | Specify port of the `book-review-api` service (default `9080`)      |
 
 - **book-review-ui**
-
-  In a terminal and inside `react-graphql-databases/book-review-ui`, run the following command
-  ```
-  docker build -f Dockerfile -t ivanfranchin/book-review-ui:1.0.0 .
-  ```
 
   | Environment Variable   | Description                                                         |
   | ---------------------- | ------------------------------------------------------------------- |
@@ -107,12 +104,10 @@ First, you need to start the environment and backend applications. For it, follo
 
 ### Start Applications
 
-- In a terminal, make sure you are inside `react-graphql-databases` root folder
-
-- Run following script
-  ```
-  ./start-apps.sh
-  ```
+In a terminal and inside `react-graphql-databases` root folder, run following script
+```
+./start-apps.sh
+```
 
 ## Applications URLs
 
@@ -171,6 +166,10 @@ First, you need to start the environment and backend applications. For it, follo
 ## TODO
 
 - Add confirmation dialog before deleting a book or a author
+
+## Issues
+
+`book-review-ui` is still using **React 17** because it's depending on `material-ui` to support **React 18**. For more information see `material-ui` issue [#32074](https://github.com/mui/material-ui/issues/32074)
 
 ## References
 
