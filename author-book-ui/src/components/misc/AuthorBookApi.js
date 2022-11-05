@@ -4,10 +4,8 @@ export const authorBookApi = {
   call
 }
 
-const headers = { 'Content-type': 'application/graphql+json' }
-
 function call(query) {
-  return instance.post('graphql', { query }, { headers })
+  return instance.post('graphql', { query })
 }
 
 // -- Axios

@@ -1,5 +1,5 @@
 # => Build container
-FROM node:18.6.0-alpine as build
+FROM node:19.0.0-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
@@ -10,7 +10,7 @@ COPY . ./
 RUN npm run build
 
 # => Run container
-FROM nginx:1.23.1-alpine
+FROM nginx:1.23.2-alpine
 
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
