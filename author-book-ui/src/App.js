@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Customer from './components/customer/Customer'
 import Author from './components/staff/Author'
 import Book from './components/staff/Book'
@@ -10,11 +10,13 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Route path='/' exact component={Customer} />
-      <Route path='/customer' exact component={Customer} />
-      <Route path='/author' exact component={Author} />
-      <Route path='/book' exact component={Book} />
-      <Route path='/wizard' exact component={AuthorBookWizard} />
+      <Routes>
+        <Route path='/' element={<Customer />} />
+        <Route path='/customer' element={<Customer />} />
+        <Route path='/author' element={<Author />} />
+        <Route path='/book' element={<Book />} />
+        <Route path='/wizard' element={<AuthorBookWizard />} />
+      </Routes>
     </Router>
   )
 }

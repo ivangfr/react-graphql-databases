@@ -7,12 +7,12 @@ function Navbar() {
     <Menu>
       <Container>
         <Menu.Item header>Author Book UI</Menu.Item>
-        <Menu.Item as={NavLink} exact to="/customer">Customer</Menu.Item>
+        <Menu.Item as={NavLink} to="/customer">Customer</Menu.Item>
         <Dropdown item text='Staff'>
           <Dropdown.Menu>
-            <Dropdown.Item as={NavLink} exact to="/author">Authors</Dropdown.Item>
-            <Dropdown.Item as={NavLink} exact to="/book">Books</Dropdown.Item>
-            <Dropdown.Item as={NavLink} exact to="/wizard">Author-Book Wizard</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/author">Authors</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/book">Books</Dropdown.Item>
+            <Dropdown.Item as={NavLink} to="/wizard">Author-Book Wizard</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Container>

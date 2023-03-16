@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Grid, Step, Icon, Button, Divider, Form, Checkbox } from 'semantic-ui-react'
+import { Navigate } from 'react-router-dom'
 import SearchStep from './SearchStep'
 import BookStep from './BookStep'
 import AuthorStep from './AuthorStep'
@@ -41,7 +42,9 @@ class AuthorBookWizard extends Component {
     yearError: false,
 
     // Complete Step
-    bookReviewApiChecked: 'unchecked'
+    bookReviewApiChecked: 'unchecked',
+
+    bookCreated: false
   }
 
   componentDidMount() {
@@ -240,7 +243,7 @@ class AuthorBookWizard extends Component {
 
     authorBookApi.call(query)
       .then(() => {
-        this.props.history.push("/customer")
+        this.setState({bookCreated: true})
       })
       .catch(error => console.log(error))
   }
@@ -266,6 +269,10 @@ class AuthorBookWizard extends Component {
   }
 
   render() {
+    if (this.state.bookCreated) {
+      return <Navigate to='/customer' />
+    }
+
     const { step } = this.state
 
     let stepContent
