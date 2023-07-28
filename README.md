@@ -1,6 +1,6 @@
 # react-graphql-databases
 
-The goal of this project is to implement two **frontend** [`ReactJS`](https://reactjs.org/) applications, `author-book-ui` and `book-review-ui`. They will consume the [`GraphQL`](https://graphql.org/) endpoints of the two **backend** applications present in the project [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases), `author-book-api` and `book-review-api`.
+The goal of this project is to implement two **frontend** [`React`](https://react.dev/) applications, `author-book-ui` and `book-review-ui`. They will consume the [`GraphQL`](https://graphql.org/) endpoints of the two **backend** applications present in the project [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases), `author-book-api` and `book-review-api`.
 
 ## Proof-of-Concepts & Articles
 
@@ -19,11 +19,11 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 - ### author-book-ui
 
-  `ReactJS` UI application where **staff members** can manage authors and books and **customers** can see the books and read/add book reviews and their rating. Its main backend application is `author-book-api` but all the reviews information are obtained from `book-review-api`. It uses [`Semantic UI React`](https://react.semantic-ui.com/) as CSS-styled framework.
+  `React` UI application where **staff members** can manage authors and books and **customers** can see the books and read/add book reviews and their rating. Its main backend application is `author-book-api` but all the reviews information are obtained from `book-review-api`. It uses [`Semantic UI React`](https://react.semantic-ui.com/) as CSS-styled framework.
 
 - ### book-review-ui
 
-  `ReactJS` UI application where **staff members** can manage books and **customers** can see the books and read/add book reviews and their rating. Its backend application is `book-review-api`. It uses [`Material UI`](https://material-ui.com/) as CSS-styled framework. 
+  `React` UI application where **staff members** can manage books and **customers** can see the books and read/add book reviews and their rating. Its backend application is `book-review-api`. It uses [`Material UI`](https://material-ui.com/) as CSS-styled framework. 
 
 ## Prerequisites
 
