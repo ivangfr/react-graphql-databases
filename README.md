@@ -30,45 +30,45 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 - [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases)
 
-  - In a terminal, run the command below to clone `springboot-graphql-databases` project
+  - In a terminal, run the command below to clone `springboot-graphql-databases` project:
     ```
     git clone https://github.com/ivangfr/springboot-graphql-databases.git
     ```
 
-  - Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-applications-docker-images
+  - Build `author-book-api` and `book-review-api` docker images as described at https://github.com/ivangfr/springboot-graphql-databases#build-applications-docker-images.
 
 ## Run Applications with Npm
 
 ### Start Environment and Backend Applications
 
-First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running applications with Maven](https://github.com/ivangfr/springboot-graphql-databases#run-applications-with-maven)
+First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running applications with Maven](https://github.com/ivangfr/springboot-graphql-databases#run-applications-with-maven).
 
 ### Start Applications
 
 - **author-book-ui**
 
-  - Open a new terminal and go to `react-graphql-databases/author-book-ui`
+  - Open a new terminal and go to `react-graphql-databases/author-book-ui`;
 
-  - Execute the command below if you are running `author-book-ui` for the first time
+  - Execute the command below if you are running `author-book-ui` for the first time:
     ```
     npm install
     ```
 
-  - To start `author-book-ui` run
+  - To start `author-book-ui` run:
     ```
     npm start
     ```
 
 - **book-review-ui**
 
-  - Open a new terminal and go to `react-graphql-databases/book-review-ui`
+  - Open a new terminal and go to `react-graphql-databases/book-review-ui`.
 
-  - Execute the command below if you are running `book-review-ui` for the first time
+  - Execute the command below if you are running `book-review-ui` for the first time:
     ```
     npm install
     ```
 
-  - To start `book-review-ui` run
+  - To start `book-review-ui` run:
     ```
     npm start
     ```
@@ -77,7 +77,7 @@ First, you need to start the environment and backend applications. For it, follo
 
 ### Build Application's Docker Images
 
-In a terminal and inside `react-graphql-databases` root folder, run the following script
+In a terminal and inside `react-graphql-databases` root folder, run the following script:
 ```
 ./docker-build.sh
 ```
@@ -102,18 +102,18 @@ In a terminal and inside `react-graphql-databases` root folder, run the followin
 
 ### Configure /etc/hosts
 
-Add the line below to `/etc/hosts`
+Add the line below to `/etc/hosts`:
 ```
 127.0.0.1 author-book-api book-review-api
 ```
 
 ### Start Environment and Backend Applications
 
-First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running Applications as Docker containers](https://github.com/ivangfr/springboot-graphql-databases#run-applications-as-docker-containers)
+First, you need to start the environment and backend applications. For it, follow the instructions at [Start Environment](https://github.com/ivangfr/springboot-graphql-databases#start-environment) and [Running Applications as Docker containers](https://github.com/ivangfr/springboot-graphql-databases#run-applications-as-docker-containers).
 
 ### Start Applications
 
-In a terminal and inside `react-graphql-databases` root folder, run following script
+In a terminal and inside `react-graphql-databases` root folder, run following script:
 ```
 ./start-apps.sh
 ```
@@ -137,11 +137,11 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 
 ## Shutdown
 
-- To stop applications
+- To stop applications:
 
-  - If they were started with `Npm`, go to the terminals where they are running and press `Ctrl+C`
+  - If they were started with `Npm`, go to the terminals where they are running and press `Ctrl+C`;
 
-  - If they were started as a Docker container, go to a terminal and, inside `react-graphql-databases` root folder, run the script below
+  - If they were started as a Docker container, go to a terminal and, inside `react-graphql-databases` root folder, run the script below:
     ```
     ./stop-apps.sh
     ```
@@ -150,21 +150,21 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 
 ## Cleanup
 
-- To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script
+- To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script:
   ```
   ./remove-docker-images.sh
   ```
 
-- Remove the line below from `/etc/hosts`
+- Remove the line below from `/etc/hosts`:
   ```
   127.0.0.1 author-book-api book-review-api
   ```
 
 ## How to upgrade application's dependencies to latest version
 
-- In a terminal, make sure you are inside `react-graphql-databases/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder
+- In a terminal, make sure you are inside `react-graphql-databases/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder;
 
-- Run the following commands
+- Run the following commands:
   ```
   npm upgrade
   npm i -g npm-check-updates
@@ -174,11 +174,11 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 
 ## TODO
 
-- Add confirmation dialog before deleting a book or a author
+- Add confirmation dialog before deleting a book or a author.
 
 ## Issues
 
-`book-review-ui` is still using **React 17** because it's depending on `material-ui` to support **React 18**. For more information see `material-ui` issue [#32074](https://github.com/mui/material-ui/issues/32074)
+`book-review-ui` is still using **React 17** because it's depending on `material-ui` to support **React 18**. For more information see `material-ui` issue [#32074](https://github.com/mui/material-ui/issues/32074).
 
 ## References
 
