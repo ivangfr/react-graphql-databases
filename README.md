@@ -79,7 +79,7 @@ First, you need to start the environment and backend applications. For it, follo
 
 In a terminal and inside `react-graphql-databases` root folder, run the following script:
 ```
-./docker-build.sh
+./build-docker-images.sh
 ```
 
 ### Application's environment variables
