@@ -19,7 +19,7 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 - ### author-book-ui
 
-  `React` UI application where **staff members** can manage authors and books and **customers** can see the books and read/add book reviews and their rating. Its main backend application is `author-book-api` but all the reviews information are obtained from `book-review-api`. It uses [`Semantic UI React`](https://react.semantic-ui.com) as CSS-styled framework.
+  `React` UI application where **staff members** can manage authors and books and **customers** can see the books and read/add book reviews and their rating. Its main backend application is `author-book-api` but all review information is obtained from `book-review-api`. It uses [`Semantic UI React`](https://react.semantic-ui.com) as CSS-styled framework.
 
 - ### book-review-ui
 
@@ -31,7 +31,7 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 - [`springboot-graphql-databases`](https://github.com/ivangfr/springboot-graphql-databases)
 
   - In a terminal, run the command below to clone `springboot-graphql-databases` project:
-    ```
+    ```bash
     git clone https://github.com/ivangfr/springboot-graphql-databases.git
     ```
 
@@ -50,12 +50,12 @@ First, you need to start the environment and backend applications. For it, follo
   - Open a new terminal and go to `react-graphql-databases/author-book-ui`;
 
   - Execute the command below if you are running `author-book-ui` for the first time:
-    ```
+    ```bash
     npm install
     ```
 
   - To start `author-book-ui` run:
-    ```
+    ```bash
     npm start
     ```
 
@@ -64,12 +64,12 @@ First, you need to start the environment and backend applications. For it, follo
   - Open a new terminal and go to `react-graphql-databases/book-review-ui`.
 
   - Execute the command below if you are running `book-review-ui` for the first time:
-    ```
+    ```bash
     npm install
     ```
 
   - To start `book-review-ui` run:
-    ```
+    ```bash
     npm start
     ```
 
@@ -78,7 +78,7 @@ First, you need to start the environment and backend applications. For it, follo
 ### Build Application's Docker Images
 
 In a terminal and inside `react-graphql-databases` root folder, run the following script:
-```
+```bash
 ./build-docker-images.sh
 ```
 
@@ -103,7 +103,7 @@ In a terminal and inside `react-graphql-databases` root folder, run the followin
 ### Configure /etc/hosts
 
 Add the line below to `/etc/hosts`:
-```
+```text
 127.0.0.1 author-book-api book-review-api
 ```
 
@@ -114,7 +114,7 @@ First, you need to start the environment and backend applications. For it, follo
 ### Start Applications
 
 In a terminal and inside `react-graphql-databases` root folder, run following script:
-```
+```bash
 ./start-apps.sh
 ```
 
@@ -127,11 +127,11 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 
 ## Demo
 
-- This gif shows a staff member adding a book using the wizard option. First, he looks for the author `josh long`. The search is looking for data at [**openlibrary.org**](https://openlibrary.org). Then, he picks the book `Getting Started With Roo`. As the author `Josh Long` is new to the application, he is created. The information of the book is already fulfilled based on the response from **openlibrary.org**. Finally, the application shows the preview of the book card, as the customer will see it. The checkbox is enabled in order to create the book also in `book-review-ui`.
+- This gif shows a staff member adding a book using the wizard option. First, he looks for the author `josh long`. The search is looking for data at [**openlibrary.org**](https://openlibrary.org). Then, he picks the book `Getting Started With Roo`. As the author `Josh Long` is new to the application, he is created. The book information is already filled in based on the response from **openlibrary.org**. Finally, the application shows the preview of the book card, as the customer will see it. The checkbox is enabled to also create the book in `book-review-ui`.
 
   ![add-book-wizard](documentation/add-book-wizard.gif)
 
-- This another gif shows a customer adding a review about the book `Getting Started With Roo`. Once the review is submitted, it is already available for customer checking books in `author-book-ui` application.
+- This other gif shows a customer adding a review for the book `Getting Started With Roo`. Once the review is submitted, it is immediately available for customers viewing books in the `author-book-ui` application.
 
   ![add-book-review](documentation/add-book-review.gif)
 
@@ -139,10 +139,10 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 
 - To stop applications:
 
-  - If they were started with `Npm`, go to the terminals where they are running and press `Ctrl+C`;
+  - If they were started with `npm`, go to the terminals where they are running and press `Ctrl+C`.
 
   - If they were started as a Docker container, go to a terminal and, inside `react-graphql-databases` root folder, run the script below:
-    ```
+    ```bash
     ./stop-apps.sh
     ```
 
@@ -151,30 +151,26 @@ In a terminal and inside `react-graphql-databases` root folder, run following sc
 ## Cleanup
 
 - To remove the Docker images created by this project, go to a terminal and, inside `react-graphql-databases` root folder, run the following script:
-  ```
+  ```bash
   ./remove-docker-images.sh
   ```
 
 - Remove the line below from `/etc/hosts`:
-  ```
+  ```text
   127.0.0.1 author-book-api book-review-api
   ```
 
 ## How to upgrade application's dependencies to latest version
 
-- In a terminal, make sure you are inside `react-graphql-databases/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder;
+- In a terminal, make sure you are inside the `react-graphql-databases/author-book-ui` or `springboot-react-keycloak/book-review-ui` folder;
 
 - Run the following commands:
-  ```
+  ```bash
   npm upgrade
   npm i -g npm-check-updates
   ncu -u
   npm install
   ```
-
-## TODO
-
-- Add confirmation dialog before deleting a book or a author.
 
 ## Issues
 
