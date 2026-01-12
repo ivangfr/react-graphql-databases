@@ -143,7 +143,10 @@ class AuthorBookWizard extends Component {
 
     openLibraryApi.get(`/search.json?q=${encodeURI(this.state.search)}`)
       .then(response => {
-        const books = response.data.docs
+        const docs = response.data.docs
+        console.log(`Total docs retrieved: ${docs.length}`)
+
+        const books = docs
           .filter(doc => doc.isbn && doc.title_suggest && doc.author_name && doc.publish_year)
           .map((doc, i) => {
             const book = {
@@ -155,6 +158,8 @@ class AuthorBookWizard extends Component {
             }
             return book
           })
+
+        console.log(`Books after filter: ${books.length}`)
         this.setState({ books, isLoading: false })
       })
       .catch(error => console.log(error))
@@ -243,7 +248,7 @@ class AuthorBookWizard extends Component {
 
     authorBookApi.call(query)
       .then(() => {
-        this.setState({bookCreated: true})
+        this.setState({ bookCreated: true })
       })
       .catch(error => console.log(error))
   }
